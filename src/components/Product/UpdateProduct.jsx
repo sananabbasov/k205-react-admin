@@ -6,8 +6,10 @@ import { BASE_URL, FILE_PATH } from '../../api/Config'
 import { getCategoryAction } from '../../redux/Actions/CategoryAction'
 import { createProductAction } from '../../redux/Actions/ProductActions'
 import { uploadAction } from '../../redux/Actions/UploadActions'
+import { useParams } from 'react-router-dom'
 
-const CreateProduct = () => {
+const UpdateProduct = () => {
+    const [productList, setProductList] = useState([])
     const [productName, setProductName] = useState()
     const [price, setPrice] = useState()
     const [category, setCategory] = useState("")
@@ -18,9 +20,17 @@ const CreateProduct = () => {
     const [coverPhoto, setCoverPhoto] = useState()
     const [productPicture, setProductPicture] = useState([])
 
+    const {id} = useParams()
     const { categories } = useSelector((state) => state.category)
     const dispatch = useDispatch()
 
+    const getData = async() =>{
+        let data = await fetch(`${BASE_URL}product/getbyid/${id}`).then(res => res.json()).then(data => setProductList(data.message))
+
+    }
+
+
+    console.log(productList);
 
     const handleChange = (event) => {
         setCategory(event.target.value);
@@ -89,6 +99,7 @@ const CreateProduct = () => {
 
     useEffect(() => {
         dispatch(getCategoryAction())
+        getData()
     }, [dispatch, coverPhoto])
 
 
@@ -99,7 +110,7 @@ const CreateProduct = () => {
                 <div className="col-lg-8">
                     <div className="row">
                         <div className="col-lg-12">
-                            <TextField fullWidth id="outlined-basic" onChange={(e) => setProductName(e.target.value)} label="Name" variant="outlined" />
+                            <TextField fullWidth id="outlined-basic" value={productList.name} onChange={(e) => setProductName(e.target.value)}  variant="outlined" />
                         </div>
                         <div className="col-lg-4 my-2">
                             <OutlinedInput
@@ -109,6 +120,7 @@ const CreateProduct = () => {
                                 endAdornment={<InputAdornment position="end">₼</InputAdornment>}
                                 aria-describedby="outlined-basic"
                                 variant="outlined"
+                                value={productList.price}
                             />
                         </div>
                         <div className="col-lg-4 my-2">
@@ -229,4 +241,4 @@ const CreateProduct = () => {
     )
 }
 
-export default CreateProduct
+export default UpdateProduct

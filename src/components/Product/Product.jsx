@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getProductsAction } from '../../redux/Actions/ProductActions';
 import { Link } from 'react-router-dom';
+import { FILE_PATH } from '../../api/Config';
 const Product = () => {
     const { products } = useSelector((state) => state.products)
     const dispatch = useDispatch();
@@ -9,7 +10,9 @@ const Product = () => {
 
     useEffect(() => {
         dispatch(getProductsAction())
-    }, [])
+    }, [dispatch])
+
+
     return (
         <div className='container'>
             <div className="row">
@@ -26,7 +29,7 @@ const Product = () => {
                         <div key={product.id} className="col-lg-3 my-2">
                             <div className="card">
                                 <div className="card-body text-center">
-                                    <img className='img-fluid' style={{ height: 200 }} src={product.coverPhoto} alt="" />
+                                    <img className='img-fluid' style={{ height: 200 }} src={`${FILE_PATH}${product.coverPhoto}`} alt="" />
                                     <h5>{product.name}</h5>
                                 </div>
                                 <div className="card-footer">
@@ -35,7 +38,9 @@ const Product = () => {
                                             <button className='btn btn-outline-danger w-100'>Delete</button>
                                         </div>
                                         <div className="col-lg-6">
-                                            <button className='btn btn-outline-warning w-100'>Edit</button>
+                                            <Link to={`/product/update/${product.id}`}>
+                                                <button className='btn btn-outline-warning w-100'>Edit</button>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>

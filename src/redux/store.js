@@ -1,16 +1,22 @@
 import {combineReducers, createStore, applyMiddleware} from '@reduxjs/toolkit'
+import { CategoryReducer } from './Reducers/CategoryReducer'
 import { ProductReducers } from './Reducers/ProductReducers'
+import { UploadReducer } from './Reducers/UploadReducer'
 
 
 const {default: thunk} = require('redux-thunk')
 const reducer = combineReducers({
-    products : ProductReducers
+    products : ProductReducers,
+    category: CategoryReducer,
+    upload: UploadReducer
 })
 
 
 
 const initialState = {
-    products: []
+    products: [],
+    category : [],
+    upload: []
 }
 
 const middleware = [thunk]

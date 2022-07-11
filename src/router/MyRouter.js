@@ -1,6 +1,8 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import CreateCategory from '../components/Category/CreateCategory'
 import CreateProduct from '../components/Product/CreateProduct'
+import UpdateProduct from '../components/Product/UpdateProduct'
 import Auth from '../pages/Auth'
 import CategoryScreen from '../pages/CategoryScreen'
 import Dashboard from '../pages/Dashboard'
@@ -16,6 +18,8 @@ const MyRouter = () => {
         <Route path='/product' element={<ProductScreen />} />
         <Route path='/category' element={<CategoryScreen />} />
         <Route path='/product/create' element={<CreateProduct />} />
+        <Route path='/product/update/:id' element={<UpdateProduct />} />
+        <Route path='/category/create' element={<CreateCategory />} />
     </Routes>
   )
 }

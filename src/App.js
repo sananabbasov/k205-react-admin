@@ -4,6 +4,10 @@ import Login from './components/Login/Login';
 import SideBar from './components/SideBar/SideBar';
 import MyRouter from './router/MyRouter';
 
+var a = 5
+console.log(window.a)
+console.log(global.a)
+
 function App() {
 
   const [login, setLogin] = useState(true)
