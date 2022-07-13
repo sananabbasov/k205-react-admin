@@ -7,6 +7,7 @@ import Auth from '../pages/Auth'
 import CategoryScreen from '../pages/CategoryScreen'
 import Dashboard from '../pages/Dashboard'
 import Home from '../pages/Home'
+import OrderScreen from '../pages/OrderScreen'
 import ProductScreen from '../pages/ProductScreen'
 
 const MyRouter = () => {
@@ -20,6 +21,7 @@ const MyRouter = () => {
         <Route path='/product/create' element={<CreateProduct />} />
         <Route path='/product/update/:id' element={<UpdateProduct />} />
         <Route path='/category/create' element={<CreateCategory />} />
+        <Route path='/order' element={<OrderScreen />} />
     </Routes>
   )
 }
